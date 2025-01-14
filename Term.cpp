@@ -1,0 +1,164 @@
+/***************************************************************
+Author:         Dr. Spiegel
+                minor alterations made by Elliot Swan
+Filename:       Term.cpp   
+Purpose:        A Term holds a single Term of a Polynomial. Capabilities:
+		- Evaluate itself 
+		- Multiply coefficient by a scalar
+		- Increment coefficient by a scalar
+		- Compare in several ways
+		- set and get (of course)
+***************************************************************/
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+#include <fstream>
+#include "Term.h"
+
+using namespace std;
+
+Term::Term(double coeff, int expn)
+{
+	coefficient=coeff; //sets the coefficient
+	exponent=expn; //sets the exponent
+}
+
+//Gets
+double Term::getCoefficient() const //returns the coefficient
+{	/*********************************************************************
+	*   Function name:  getCoefficient
+	*   Description:   retrieves the coefficient
+	*   Parameters:  n/a
+	*                                                                   
+	*   Return Value: double- the coefficient at the index
+	*********************************************************************/
+	return(coefficient); //return  the coefficient 
+}
+
+int Term::getExponent() const //returns the exponent
+{	/*********************************************************************
+	*   Function name:  getExponent
+	*   Description:   retrieves the exponent
+	*   Parameters:  n/a
+	*                                                                   
+	*   Return Value: int- the exponent at the index
+	*********************************************************************/
+	return(exponent); //return  the exponent
+}
+
+//Other
+double Term::operator()(double x) const //evaluates the term with x
+{	/*********************************************************************
+	*   Function name:  operator()
+	*   Description:   Evaluates the term by the input number 
+	*   Parameters:  double x- import -the number to evaluate to 
+	*                                                                   
+	*   Return Value: the sum of the evaluated term
+	*********************************************************************/
+	return(getCoefficient() * (pow(x, getExponent()))); //returns the evaluation
+}
+
+bool Term::operator==(int value) //compares exponents
+{	/*********************************************************************
+	*   Function name:  operator==
+	*   Description:  Compares an int against the exponent
+	*   Parameters: int value- import - the number to compare the exponent by
+	*                                                                   
+	*   Return Value: true- if match // false- if doesn't match
+	*********************************************************************/
+	return(value == getExponent());
+}
+
+bool Term::operator==(const Term &right) //compares exponents
+{	/*********************************************************************
+	*   Function name:  operator==
+	*   Description:  Compares an int against the exponent
+	*   Parameters: int value- import - the number to compare the exponent by
+	*                                                                   
+	*   Return Value: true- if match // false- if doesn't match
+	*********************************************************************/
+	return(getExponent()==right.getExponent());
+}
+
+bool Term::operator< (Term &right) //checks if the incoming value is greater than the exponent
+{	/*********************************************************************
+	*   Function name:  operator<
+	*   Description:  Compares two Terms based on exponent
+	*   Parameters: int value- import -the value to make the comparision to
+	*                                                                   
+	*   Return Value: according to the comparison
+	*********************************************************************/
+	return(getExponent() < right.getExponent());
+}
+
+bool Term::operator< (int right) //checks if the incoming value is greater than the exponent
+{	/*********************************************************************
+	*   Function name:  operator<
+	*   Description:  Compares Term's exponent to an int
+	*   Parameters: int value- import - the value to make the comparision to
+	*                                                                   
+	*   Return Value: according to the comparison
+	*********************************************************************/
+	return(getExponent() < right);
+}
+
+/*************************************************************************/
+/* */
+/* Function name: operator> */
+/* Description: compares the left terms exponent to right */
+/* Member Type: facilitator*/
+/* Parameters:  int right - import - the value to be compared to */
+/* Return Value: bool - true if left exp > right false otherwise
+/* */
+/*************************************************************************/
+bool Term::operator>(int right)
+{
+  return(getExponent() > right);
+}
+
+/*************************************************************************/
+/* */
+/* Function name: operator> */
+/* Description: compares the left terms exponent to right */
+/* Member Type: facilitator*/
+/* Parameters:  Term right - import -the value to be compared to */
+/* Return Value: bool - true if left exp > right false otherwise
+/* */
+/*************************************************************************/
+bool Term::operator>(Term& right)
+{
+  return(getExponent() > right.getExponent());
+}
+
+/*************************************************************************/
+/* */
+/* Function name: operator!= */
+/* Description: compares the left terms exponent to right */
+/* Member Type: facilitator*/
+/* Parameters:  Term right - import -the value to be compared to */
+/* Return Value: bool - true if left exp != right false otherwise
+/* */
+/*************************************************************************/
+bool Term::operator!=(Term& right)
+{
+  return(getExponent() != right.getExponent());
+}
+
+
+ostream &operator<<(ostream &output,const Term &term)
+{	/*********************************************************************
+	*   Function name:  operator<<
+	*   Description:  For output
+	*   Parameters: ofstream &ouput import export- 
+	*   const Term &t- the term object to be outputted
+	*                                                                   
+	*   Return Value: output
+	*********************************************************************/
+	if (term.getCoefficient()!=1)
+		output << term.getCoefficient();
+	if (term.getExponent() ==1)//if it needs an x^ or x
+		output << "x"; // x alone if to the one power
+	else if (term.getExponent() > 1)
+		output << "x^" << term.getExponent(); 
+	return (output); //returns the results //enables cascading
+}
