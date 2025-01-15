@@ -11,13 +11,6 @@
 /*  */
 /************************************************************/
 
-
-// File: TermList.h
-// Abstract base class for containers of Terms
-// Known subclasses:
-//      TermArray
-// Coming soon: ParallelArrayTermList, TermVectorList, ...
-
 #ifndef TERMLIST_H
 #define TERMLIST_H
 
@@ -53,6 +46,7 @@ public:
   //
   // Print the data iteratively
   virtual void printIteratively()=0;
+
   /*************************************************************************/
 /* */
 /* Function name: void printPtr() */
@@ -64,7 +58,7 @@ public:
 /*************************************************************************/
 
   // Print the data Iteratively with a pointer
-  virtual void printPtr() {}   // not pure virtual; why?
+  virtual void printPtr() {}   
 
     /*************************************************************************/
 /* */

@@ -60,7 +60,7 @@ public:
   Node<eltType>* copy(Node<eltType> *); 
 
   private:
-  Node<eltType>* head;
+    Node<eltType>* head;
 
   friend class DblLinkItr<eltType>;
     
