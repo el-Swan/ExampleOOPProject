@@ -16,3 +16,5 @@ one polynomial can be added by entering multiple values like those found in the 
 This program may be run in interactive or automated mode. Usage for interacive is simply to execute the executable. To run the program in 
 an automated mode that runs all data structures, execute the program, followed by the name of the file and value to evaluate the polynomial for. 
 EX) ./app example.txt 3
+
+Some of the code was provided to me by my professor, Dr. Spiegel. Code authored by Dr. Spiegel is indicated in the documentation block where applicable 
